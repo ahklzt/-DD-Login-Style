@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="PAGE_CONTAINER" modification_key="dd_login_page_container_login" description="login - page" execution_order="5" enabled="1" action="str_replace">
+    <find><![CDATA[<a href="{{ link('login') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--logIn"
+							data-xf-click="overlay" data-follow-redirects="on">
+							<span class="p-navgroup-linkText">{{ phrase('log_in') }}</span>
+						</a>]]></find>
+    <replace><![CDATA[<a href="{{ link('login') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--logIn"
+							data-follow-redirects="on">
+							<span class="p-navgroup-linkText">{{ phrase('log_in') }}</span>
+						</a>]]></replace>
+  </modification>
+  <modification type="public" template="PAGE_CONTAINER" modification_key="dd_login_page_container_register" description="register - page" execution_order="1" enabled="1" action="str_replace">
+    <find><![CDATA[<a href="{{ link('register') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--register"
+								data-xf-click="overlay" data-follow-redirects="on">
+								<span class="p-navgroup-linkText">{{ phrase('register') }}</span>
+							</a>
+
+]]></find>
+    <replace><![CDATA[<a href="{{ link('register') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--register"
+								data-follow-redirects="on">
+								<span class="p-navgroup-linkText">{{ phrase('register') }}</span>
+							</a>]]></replace>
+  </modification>
+  <modification type="public" template="login" modification_key="dd_login_modification" description="template login" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:js src="xf/login_signup.js" min="1" />
+
+<xf:title>{{ phrase('log_in') }}</xf:title>
+
+<xf:head option="robots"><meta name="robots" content="noindex" /></xf:head>
+
+<xf:if is="$xf.session.preRegActionKey">
+	<div class="blockMessage blockMessage--highlight">
+		{{ phrase('pre_reg_action_notice_login') }}<br />
+		<br />
+		{{ phrase('dont_have_account_question') }}
+		<xf:button class="button--link"
+			href="{{ link('register', null, {'_xfRedirect': $redirect}) }}"
+			data-xf-click="overlay"
+		>{{ phrase('register') }}</xf:button>
+	</div>
+</xf:if>
+
+<xf:if contentcheck="true">
+	<div class="blockMessage blockMessage--error blockMessage--iconic">
+		<xf:contentcheck>{$error}</xf:contentcheck>
+	</div>
+</xf:if>
+
+<div class="blocks">
+	<xf:form action="{{ link('login/login') }}" class="block">
+		<div class="block-container">
+			<div class="block-body">
+				<xf:textboxrow name="login" value="{$login}" autofocus="autofocus" autocomplete="username"
+					label="{{ phrase('your_name_or_email_address') }}" />
+
+				<xf:passwordboxrow name="password" autocomplete="current-password"
+					label="{{ phrase('password') }}">
+
+					<xf:html>
+						<a href="{{ link('lost-password') }}" data-xf-click="overlay">{{ phrase('forgot_your_password') }}</a>
+					</xf:html>
+				</xf:passwordboxrow>
+
+				<xf:if is="$captcha">
+					<xf:captcharow label="{{ phrase('verification') }}" force="true" force-visible="true" context="xf_login" />
+				</xf:if>
+
+				<xf:checkboxrow>
+					<xf:option name="remember" selected="true">{{ phrase('stay_logged_in') }}</xf:option>
+				</xf:checkboxrow>
+
+				<xf:hiddenval name="_xfRedirect">{$redirect}</xf:hiddenval>
+			</div>
+			<xf:submitrow icon="login" />
+		</div>
+		<xf:if is="$xf.options.registrationSetup.enabled">
+			<div class="block-outer block-outer--after">
+				<div class="block-outer-middle">
+					{{ phrase('dont_have_account_question') }} <xf:button href="{{ link('register') }}">{{ phrase('register_now') }}</xf:button>
+				</div>
+			</div>
+		</xf:if>
+	</xf:form>
+
+	<xf:if is="$providers is not empty">
+		<div class="blocks-textJoiner"><span></span><em>{{ phrase('or_separator') }}</em><span></span></div>
+
+		<div class="block">
+			<div class="block-container">
+				<div class="block-body">
+					<xf:formrow rowtype="button"
+						label="{{ phrase('log_in_using') }}">
+
+						<ul class="listHeap">
+							<xf:foreach loop="$providers" value="$provider">
+								<li>
+									<xf:macro template="connected_account_macros" name="button"
+										arg-provider="{$provider}" />
+								</li>
+							</xf:foreach>
+						</ul>
+					</xf:formrow>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+</div>]]></find>
+    <replace><![CDATA[<xf:include template="dd_login" />]]></replace>
+  </modification>
+  <modification type="public" template="register_form" modification_key="dd_login_register_form" description="template registory" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:js src="xf/login_signup.js" min="1" />
+
+<xf:title>{{ phrase('register') }}</xf:title>
+
+<xf:head option="robots"><meta name="robots" content="noindex" /></xf:head>
+
+<xf:if is="$xf.session.preRegActionKey">
+	<div class="blockMessage blockMessage--highlight">
+		{{ phrase('pre_reg_action_notice') }}<br />
+		<br />
+		{{ phrase('already_have_account') }}
+		<xf:button class="button--link"
+			href="{{ link('login', null, {'_xfRedirect': $redirect}) }}"
+			data-xf-click="overlay"
+		>{{ phrase('login') }}</xf:button>
+	</div>
+</xf:if>
+
+<xf:if is="$providers is not empty">
+	<div class="block">
+		<div class="block-container">
+			<div class="block-body">
+				<xf:formrow rowtype="button"
+					label="{{ phrase('register_faster_using') }}">
+
+					<ul class="listHeap">
+						<xf:foreach loop="$providers" value="$provider">
+							<li>
+								<xf:macro template="connected_account_macros" name="button"
+									arg-provider="{$provider}" />
+							</li>
+						</xf:foreach>
+					</ul>
+				</xf:formrow>
+			</div>
+		</div>
+	</div>
+</xf:if>
+
+<xf:form action="{{ link('register/register') }}" ajax="true" class="block"
+	data-xf-init="reg-form" data-timer="{$xf.options.registrationTimer}">
+
+	<div class="block-container">
+		<div class="block-body">
+
+			<xf:comment>Spam catcher field</xf:comment>
+			<xf:textboxrow name="username" value="" autocomplete="off" rowclass="formRow--limited"
+				maxlength="{{ max_length($xf.visitor, 'username') }}"
+				label="{{ phrase('user_name') }}"
+				explain="{{ phrase('please_leave_this_field_blank') }}" />
+
+			<xf:macro template="register_macros" name="username_row"
+				arg-fieldName="{{ $regForm.getFieldName('username') }}"
+				arg-value="{$fields.username}" />
+
+			<xf:comment>Spam catcher field</xf:comment>
+			<xf:if is="{{ rand(0, 2) == 1 }}">
+				<xf:textboxrow name="{{ $regForm.getFieldName('email_hp') }}" value="" type="email" autocomplete="off"
+					rowclass="formRow--limited"
+					maxlength="{{ max_length($xf.visitor, 'email') }}"
+					label="{{ phrase('email') }}"
+					explain="{{ phrase('please_leave_this_field_blank') }}" />
+			</xf:if>
+
+			<xf:macro template="register_macros" name="email_row"
+				arg-fieldName="{{ $regForm.getFieldName('email') }}"
+				arg-value="{$fields.email}" />
+
+			<xf:comment>Spam catcher field</xf:comment>
+			<xf:if is="{{ rand(0, 2) == 1 }}">
+				<xf:textboxrow name="email" value="" type="email" autocomplete="off" rowclass="formRow--limited"
+					maxlength="{{ max_length($xf.visitor, 'email') }}"
+					label="{{ phrase('email') }}"
+					explain="{{ phrase('please_leave_this_field_blank') }}" />
+			</xf:if>
+
+			<xf:comment>Spam catcher field</xf:comment>
+			<xf:if is="{{ rand(0, 2) == 1 }}">
+				<xf:textboxrow name="password" type="password" autocomplete="off" rowclass="formRow--limited"
+					label="{{ phrase('password') }}"
+					explain="{{ phrase('please_leave_this_field_blank') }}" />
+			</xf:if>
+
+			<xf:passwordboxrow name="{{ $regForm.getFieldName('password') }}" autocomplete="new-password"
+				label="{{ phrase('password') }}"
+				hint="{{ phrase('required') }}"
+				required="required" checkstrength="true" />
+
+			<xf:macro template="register_macros" name="dob_row" />
+
+			<xf:macro template="register_macros" name="location_row"
+				arg-value="{$fields.location}" />
+
+			<xf:macro template="register_macros" name="custom_fields" />
+
+			<xf:captcharow label="{{ phrase('verification') }}" hint="{{ phrase('required') }}" context="xf_register" />
+
+			<xf:macro template="register_macros" name="email_choice_row" />
+
+			<xf:macro template="register_macros" name="tos_row" />
+		</div>
+		<xf:macro template="register_macros" name="submit_row" />
+	</div>
+
+	<xf:hiddenval name="reg_key">{{ $regForm.getUniqueKey() }}</xf:hiddenval>
+	<xf:hiddenval name="{{ $regForm.getFieldName('timezone') }}" value="" data-xf-init="auto-timezone" />
+</xf:form>]]></find>
+    <replace><![CDATA[<xf:include template="dd_registory_form" />]]></replace>
+  </modification>
+  <modification type="public" template="register_macros" modification_key="dd_login_register_macros" description="template register macros" execution_order="1" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:macro name="username_row"
+	arg-fieldName="username"
+	arg-value=""
+	arg-autoFocus="{{ true }}">
+
+	<xf:textboxrow name="{$fieldName}" value="{$value}" autocomplete="username" required="required"
+		autofocus="{{ $autoFocus ? 'autofocus' : false }}"
+		maxlength="{{ $xf.options.usernameLength.max ?: max_length($xf.visitor, 'username') }}"
+		label="{{ phrase('user_name') }}"
+		hint="{{ phrase('required') }}"
+		explain="{{ phrase('this_is_name_that_will_be_shown_with_your_messages') }}"
+		validation-url="{{ link('misc/validate-username') }}" />
+</xf:macro>
+
+<xf:macro name="email_row"
+	arg-fieldName="email"
+	arg-value="">
+
+	<xf:textboxrow name="{$fieldName}" value="{$value}" type="email" autocomplete="email" required="required"
+		maxlength="{{ max_length($xf.visitor, 'email') }}"
+		label="{{ phrase('email') }}"
+		hint="{{ phrase('required') }}" />
+</xf:macro>]]></find>
+    <replace><![CDATA[<xf:macro name="username_row"
+	arg-fieldName="username"
+	arg-value=""
+	arg-autoFocus="{{ true }}">
+
+	<xf:textboxrow name="{$fieldName}" value="{$value}" autocomplete="username" required="required"
+		autofocus="{{ $autoFocus ? 'autofocus' : false }}"
+		maxlength="{{ $xf.options.usernameLength.max ?: max_length($xf.visitor, 'username') }}"
+		label="{{ phrase('user_name') }}"
+		hint="{{ phrase('required') }}"
+		placeholder="{{ phrase('dd_login_username') }}"/>
+</xf:macro>
+
+<xf:macro name="email_row"
+	arg-fieldName="email"
+	arg-value="">
+
+	<xf:textboxrow name="{$fieldName}" value="{$value}" type="email" autocomplete="email" required="required"
+		maxlength="{{ max_length($xf.visitor, 'email') }}"
+		placeholder="{{ phrase('dd_login_email') }}"
+		label="{{ phrase('email') }}"
+		hint="{{ phrase('required') }}" />
+</xf:macro>]]></replace>
+  </modification>
+</template_modifications>

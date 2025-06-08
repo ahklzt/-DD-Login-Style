@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="public" title="dd_login" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:css>
+	.inputGroup.inputGroup--joined .inputGroup-text {
+		border: 1px solid #272727;
+		background: #272727;
+		text-align: center;
+		padding: 4px 10px;
+	}
+	
+	.iconic.iconic--hideShow {
+		min-width: 0;
+		cursor: crosshair;
+	}
+	
+	.iconic.iconic--hideShow .iconic-label {
+		display: none;
+	}
+	
+	.formRow > dt {
+		display: none;
+	}
+	
+	.remember {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 12px;
+	}
+	
+	.inputChoices {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.iconic>input {
+		height: 1px;
+		width: 1px;
+		margin: -1px;
+		padding: 0;
+		border: 0;
+		clip: rect(0 0 0 0);
+		overflow: hidden;
+		position: absolute;
+		left: 0;
+		width: auto;
+		height: auto;
+	}
+	.remember a {
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 16px;
+		letter-spacing: -0.13px;
+	}
+	.form-wrapper a {
+		color: #6366F1;
+		text-decoration: none;
+	}
+
+	
+	
+	.dd-lost-password {
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 16px;
+		letter-spacing: -0.13px;
+		color: #007ee5;
+		text-decoration: none;
+		display: flex;
+		flex-direction: row-reverse;
+	}
+	
+	.login-prompt {
+		margin: 24px 0;
+	}
+	
+	.main-container .error {
+		color: #FF5151;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 18px;
+		letter-spacing: -0.15px;
+		margin-top: 6px;
+		text-align: start;
+	}
+	
+	.formSubmitRow-bar {
+		position: relative;
+		background: rgb(0 0 0 / 0%);
+		border-top: 1px solid #00000000;
+	}
+	.form-wrapper {
+		background-color: #1c1c1c;
+		padding: 24px;
+		border-radius: 4px;
+		width: 490px;
+		text-align: center;
+	}
+
+	.logo-section {
+		margin-top: 24px;
+		width: 80px;
+		display: inline-block;
+	}
+	
+	.p-footer {
+		display: none;
+	}
+	
+	.p-nav {
+		display: none;
+	}
+	.p-body-header {
+		display: none;
+	}
+	
+	.formRow.formRow--input > dt {
+		display: none;
+	}
+	
+	.header {
+		margin-bottom: 24px;
+		font-size: 13px;
+		font-weight: 400;
+	}
+	.form {
+		display: flex;
+		flex-direction: column;
+	}
+	.login-prompt {
+		margin: 24px 0;
+	}
+	.main-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+		position: relative;
+		background: none;
+		margin-top: 15% !important;
+	}
+	.p-body-main {
+		margin-top: 8px;
+	}
+	.p-body-inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		max-width: 1200px;
+		padding: 0 10px;
+		margin: 0 auto;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 6px;
+		padding-bottom: 12px;
+	}
+	.formSubmitRow-controls > .button:first-child:last-child {
+		min-width: 250px;
+	}
+	
+	.formSubmitRow-controls {
+		position: relative;
+		padding-left: 0;
+		padding-top: 6px;
+		padding-bottom: 6px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+</xf:css>
+
+<xf:js src="xf/login_signup.js" min="1" />
+
+<xf:title>{{ phrase('log_in') }}</xf:title>
+
+<xf:head option="robots"><meta name="robots" content="noindex" /></xf:head>
+
+<xf:if is="$xf.session.preRegActionKey">
+	<div class="blockMessage blockMessage--highlight">
+		{{ phrase('pre_reg_action_notice_login') }}<br />
+		<br />
+		{{ phrase('dont_have_account_question') }}
+		<xf:button class="button--link"
+			href="{{ link('register', null, {'_xfRedirect': $redirect}) }}"
+			data-xf-click="overlay"
+		>{{ phrase('register') }}</xf:button>
+	</div>
+</xf:if>
+
+<xf:if contentcheck="true">
+	<div class="blockMessage blockMessage--error blockMessage--iconic">
+		<xf:contentcheck>{$error}</xf:contentcheck>
+	</div>
+</xf:if>
+
+<div class="main-container">
+	<div class="form-wrapper">
+		<xf:form action="{{ link('login/login') }}" class="block">
+				<div class="block-body">
+					<div class="logo-section">
+						<img src="https://ddcats.xyz/data/assets/logo/icon192.png" alt="DDCats.xyz">
+					</div>
+					<h2>
+						{{ phrase('dd_login_entrance') }}
+					</h2>
+					<xf:textboxrow name="login" value="{$login}" autofocus="autofocus" autocomplete="username" placeholder="{{ phrase('dd_login_username_or_email') }}"/>
+					<xf:passwordboxrow name="password" autocomplete="current-password" placeholder="{{ phrase('dd_login_password') }}"></xf:passwordboxrow>
+					
+					<xf:submitrow icon="login" />
+					
+					<xf:if is="$captcha">
+						<xf:captcharow label="{{ phrase('verification') }}" force="true" force-visible="true" context="xf_login" />
+					</xf:if>
+
+					<div class="remember">
+						<ul class="inputChoices">
+							<li class="inputChoices-choice">
+								<label class="iconic">
+									<input type="checkbox" name="remember" value="1" checked="checked"><i aria-hidden="true"></i>
+									<span class="iconic-label">
+										{{ phrase('dd_login_stay_logged_in') }}
+									</span>
+								</label>
+							</li>
+						</ul>
+						<a class="dd-lost-password" href="/lost-password/">{{ phrase('dd_login_forgot_your_password') }}</a>
+					</div>
+
+					<xf:hiddenval name="_xfRedirect">{$redirect}</xf:hiddenval>
+				</div>
+			
+				<div class="login-prompt" bis_skin_checked="1">
+					<a href="/register/">{{ phrase('dd_login_have_an_account') }}</a>
+				</div>
+		</xf:form>
+	</div>
+</div>]]></template>
+  <template type="public" title="dd_registory_form" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:css>
+	.inputGroup.inputGroup--joined .inputGroup-text {
+		border: 1px solid #272727;
+		background: #272727;
+		text-align: center;
+		padding: 4px 10px;
+	}
+	
+	.iconic.iconic--hideShow {
+		min-width: 0;
+		cursor: crosshair;
+	}
+	
+	.iconic.iconic--hideShow .iconic-label {
+		display: none;
+	}
+	
+	.formRow > dt {
+		display: none;
+	}
+	
+	.remember {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 12px;
+	}
+	
+	.inputChoices {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	
+	.iconic>input {
+		height: 1px;
+		width: 1px;
+		margin: -1px;
+		padding: 0;
+		border: 0;
+		clip: rect(0 0 0 0);
+		overflow: hidden;
+		position: absolute;
+		left: 0;
+		width: auto;
+		height: auto;
+	}
+	.remember a {
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 16px;
+		letter-spacing: -0.13px;
+	}
+	.form-wrapper a {
+		color: #6366F1;
+		text-decoration: none;
+	}
+
+	.formSubmitRow-controls {
+		position: relative;
+		padding-left: 0;
+		padding-top: 6px;
+		padding-bottom: 6px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	
+	.dd-lost-password {
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 16px;
+		letter-spacing: -0.13px;
+		color: #007ee5;
+		text-decoration: none;
+		display: flex;
+		flex-direction: row-reverse;
+	}
+	
+	.p-footer {
+		display: none;
+	}
+	
+	.p-nav {
+		display: none;
+	}
+	.p-body-header {
+		display: none;
+	}
+	
+	.formRow.formRow--input > dt {
+		display: none;
+	}
+	
+	.login-prompt {
+		margin: 24px 0;
+	}
+	
+	.main-container .error {
+		color: #FF5151;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 18px;
+		letter-spacing: -0.15px;
+		margin-top: 6px;
+		text-align: start;
+	}
+	
+	.formSubmitRow-bar {
+		position: relative;
+		background: rgb(0 0 0 / 0%);
+		border-top: 1px solid #00000000;
+	}
+	.form-wrapper {
+		background-color: #1c1c1c;
+		padding: 24px;
+		border-radius: 4px;
+		width: 490px;
+		text-align: center;
+	}
+
+	.logo-section {
+		margin-top: 24px;
+		width: 80px;
+		display: inline-block;
+	}
+
+	.header {
+		margin-bottom: 24px;
+		font-size: 13px;
+		font-weight: 400;
+	}
+	.form {
+		display: flex;
+		flex-direction: column;
+	}
+	.login-prompt {
+		margin: 24px 0;
+	}
+	.main-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+		position: relative;
+		background: none;
+		margin-top: 15% !important;
+	}
+	.p-body-main {
+		margin-top: 8px;
+	}
+	.p-body-inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		max-width: 1200px;
+		padding: 0 10px;
+		margin: 0 auto;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 6px;
+		padding-bottom: 12px;
+	}
+	.formSubmitRow-controls > .button:first-child:last-child {
+		min-width: 250px;
+	}
+</xf:css>
+
+<xf:js src="xf/login_signup.js" min="1" />
+
+<xf:title>{{ phrase('register') }}</xf:title>
+
+<xf:head option="robots"><meta name="robots" content="noindex" /></xf:head>
+
+<xf:if is="$xf.session.preRegActionKey">
+	<div class="blockMessage blockMessage--highlight">
+		{{ phrase('pre_reg_action_notice') }}<br />
+		<br />
+		{{ phrase('already_have_account') }}
+		<xf:button class="button--link"
+			href="{{ link('login', null, {'_xfRedirect': $redirect}) }}"
+			data-xf-click="overlay"
+		>{{ phrase('login') }}</xf:button>
+	</div>
+</xf:if>
+
+<div class="main-container">
+	<div class="form-wrapper">
+	
+	<div class="logo-section">
+		<img src="https://ddcats.xyz/data/assets/logo/icon192.png" alt="DDCats.xyz">
+	</div>
+	<h2>
+		{{ phrase('dd_login_registory') }}
+	</h2>
+	
+	<xf:form action="{{ link('register/register') }}" ajax="true" class="block"
+		data-xf-init="reg-form" data-timer="{$xf.options.registrationTimer}">
+
+		<div class="block-container">
+			<div class="block-body">
+
+				<xf:comment>Spam catcher field</xf:comment>
+				<xf:textboxrow name="username" value="" autocomplete="off" rowclass="formRow--limited"
+					maxlength="{{ max_length($xf.visitor, 'username') }}"
+					placeholder="{{ phrase('dd_login_username') }}"/>
+
+				<xf:macro template="register_macros" name="username_row"
+					arg-fieldName="{{ $regForm.getFieldName('username') }}"
+					arg-value="{$fields.username}" />
+
+				<xf:comment>Spam catcher field</xf:comment>
+				<xf:if is="{{ rand(0, 2) == 1 }}">
+					<xf:textboxrow name="{{ $regForm.getFieldName('email_hp') }}" value="" type="email" autocomplete="off"
+						rowclass="formRow--limited"
+						maxlength="{{ max_length($xf.visitor, 'email') }}"
+						placeholder="{{ phrase('dd_login_username') }}" />
+				</xf:if>
+
+				<xf:macro template="register_macros" name="email_row"
+					arg-fieldName="{{ $regForm.getFieldName('email') }}"
+					arg-value="{$fields.email}" />
+
+				<xf:comment>Spam catcher field</xf:comment>
+				<xf:if is="{{ rand(0, 2) == 1 }}">
+					<xf:textboxrow name="email" value="" type="email" autocomplete="off" rowclass="formRow--limited"
+						maxlength="{{ max_length($xf.visitor, 'email') }}"/>
+				</xf:if>
+
+				<xf:comment>Spam catcher field</xf:comment>
+				<xf:if is="{{ rand(0, 2) == 1 }}">
+					<xf:textboxrow name="password" type="password" autocomplete="off" rowclass="formRow--limited"
+						label="{{ phrase('password') }}"
+						explain="{{ phrase('please_leave_this_field_blank') }}"
+						placeholder="{{ phrase('dd_login_password') }}"/>
+				</xf:if>
+
+				<xf:passwordboxrow name="{{ $regForm.getFieldName('password') }}" autocomplete="new-password"
+					label="{{ phrase('password') }}"
+					hint="{{ phrase('required') }}"
+					placeholder="Пароль"
+					required="required" checkstrength="true" />
+
+				<xf:macro template="register_macros" name="dob_row" />
+
+				<xf:macro template="register_macros" name="location_row"
+					arg-value="{$fields.location}" />
+
+				<xf:macro template="register_macros" name="custom_fields" />
+
+				<xf:captcharow label="{{ phrase('verification') }}" hint="{{ phrase('required') }}" context="xf_register" />
+
+				<xf:macro template="register_macros" name="email_choice_row" />
+
+				<xf:macro template="register_macros" name="tos_row" />
+			</div>
+			<xf:macro template="register_macros" name="submit_row" />
+		</div>
+
+		<xf:hiddenval name="reg_key">{{ $regForm.getUniqueKey() }}</xf:hiddenval>
+		<xf:hiddenval name="{{ $regForm.getFieldName('timezone') }}" value="" data-xf-init="auto-timezone" />
+	</xf:form>
+	</div>
+</div>]]></template>
+</templates>
