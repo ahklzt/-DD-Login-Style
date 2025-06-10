@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <template_modifications>
   <modification type="public" template="PAGE_CONTAINER" modification_key="dd_login_page_container_login" description="login - page" execution_order="5" enabled="1" action="str_replace">
-    <find><![CDATA[<a href="{{ link('login') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--logIn"
+    <find><![CDATA[<xf:else />
+						<a href="{{ link('login') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--logIn"
 							data-xf-click="overlay" data-follow-redirects="on">
 							<span class="p-navgroup-linkText">{{ phrase('log_in') }}</span>
-						</a>]]></find>
-    <replace><![CDATA[<a href="{{ link('login') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--logIn"
-							data-follow-redirects="on">
-							<span class="p-navgroup-linkText">{{ phrase('log_in') }}</span>
-						</a>]]></replace>
-  </modification>
-  <modification type="public" template="PAGE_CONTAINER" modification_key="dd_login_page_container_register" description="register - page" execution_order="1" enabled="1" action="str_replace">
-    <find><![CDATA[<a href="{{ link('register') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--register"
+						</a>
+						<xf:if is="$xf.options.registrationSetup.enabled">
+							<a href="{{ link('register') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--register"
 								data-xf-click="overlay" data-follow-redirects="on">
 								<span class="p-navgroup-linkText">{{ phrase('register') }}</span>
 							</a>
-
-]]></find>
-    <replace><![CDATA[<a href="{{ link('register') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--register"
+						</xf:if>
+					</xf:if>]]></find>
+    <replace><![CDATA[<xf:else />
+						<a href="{{ link('login') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--logIn"
+							data-follow-redirects="on">
+							<span class="p-navgroup-linkText">{{ phrase('log_in') }}</span>
+						</a>
+						<xf:if is="$xf.options.registrationSetup.enabled">
+							<a href="{{ link('register') }}" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--register"
 								data-follow-redirects="on">
 								<span class="p-navgroup-linkText">{{ phrase('register') }}</span>
-							</a>]]></replace>
+							</a>
+						</xf:if>
+					</xf:if>
+]]></replace>
   </modification>
   <modification type="public" template="login" modification_key="dd_login_modification" description="template login" execution_order="10" enabled="1" action="str_replace">
     <find><![CDATA[<xf:js src="xf/login_signup.js" min="1" />

@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<options/>
+<options>
+  <option option_id="dd_login_background" edit_format="textbox" data_type="string" advanced="0">
+    <default_value>styles/default/xenforo/LoginStyle/dd-background.jpg</default_value>
+    <relation group_id="dd_loginstyle" display_order="20"/>
+  </option>
+  <option option_id="dd_login_icon" edit_format="textbox" data_type="string" advanced="0">
+    <default_value>styles/default/xenforo/xenforo-logo.png</default_value>
+    <relation group_id="dd_loginstyle" display_order="10"/>
+  </option>
+</options>

@@ -4,10 +4,17 @@
   <phrase title="dd_login_entrance" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Entrance]]></phrase>
   <phrase title="dd_login_forgot_your_password" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Forgot your password?]]></phrase>
   <phrase title="dd_login_have_an_account" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Don't have an account?]]></phrase>
+  <phrase title="dd_login_icon" version_id="1000070" version_string="1.0.0"><![CDATA[Icon]]></phrase>
   <phrase title="dd_login_password" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Password]]></phrase>
   <phrase title="dd_login_project" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[DDCats.xyz]]></phrase>
   <phrase title="dd_login_registory" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Registration]]></phrase>
   <phrase title="dd_login_stay_logged_in" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Remember me]]></phrase>
   <phrase title="dd_login_username" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Username]]></phrase>
   <phrase title="dd_login_username_or_email" version_id="1000070" version_string="1.0.0" global_cache="1"><![CDATA[Username or email]]></phrase>
+  <phrase title="option.dd_login_background" version_id="1000070" version_string="1.0.0"><![CDATA[Background]]></phrase>
+  <phrase title="option.dd_login_icon" version_id="1000070" version_string="1.0.0"><![CDATA[Icon]]></phrase>
+  <phrase title="option_explain.dd_login_background" version_id="1000070" version_string="1.0.0"><![CDATA[Background for your project (for larger projects)]]></phrase>
+  <phrase title="option_explain.dd_login_icon" version_id="1000070" version_string="1.0.0"><![CDATA[Select your forum icon.]]></phrase>
+  <phrase title="option_group.dd_loginstyle" version_id="1000070" version_string="1.0.0"><![CDATA[[DD] Login Style]]></phrase>
+  <phrase title="option_group_description.dd_loginstyle" version_id="1000070" version_string="1.0.0"><![CDATA[Настройки плагина]]></phrase>
 </phrases>
